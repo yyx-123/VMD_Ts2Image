@@ -2,6 +2,7 @@ import scipy.io as scio
 import numpy as np
 import utils
 from tqdm import tqdm
+import os
 import matplotlib.pyplot as plt
 
 # 提取任务数据
@@ -17,6 +18,7 @@ t = np.linspace(0, Ts*LEN, LEN)
 # 提取每一个被试的近红外数据
 for SubId in range(1, 31):
     print(SubId)
+    SubDir = str(SubId) + "\\"
     if SubId <= 9:
         nirsdata = scio.loadmat('..\\dataset\\Sub0' + str(SubId) + '.mat')['nirsdata'][0][0][0]
     else:
@@ -38,5 +40,8 @@ for SubId in range(1, 31):
 
                 # 保存结果
                 tgtDir = "..\VMD\IMFs\\"
-                fileName = "SubId={},taskNum={},task={},channel={}".format(SubId, taskNum, event[taskNum], channel)
+                if not os.path.exists(tgtDir + SubDir):
+                    os.mkdir(tgtDir + SubDir)
+                fileName = "taskNum={}_task={}_channel={}".format(taskNum, event[taskNum], channel)
+                np.save(tgtDir + SubDir + fileName, u)
                 
