@@ -4,10 +4,12 @@ from pyts.image import GramianAngularField
 import numpy as np
 from scipy.fftpack import fft, fftfreq
 import matplotlib.pyplot as plt
-import utils
+import VMD.utils as utils
 from tqdm import tqdm
 import scipy.io as scio
 import time
+import HRF
+
 
 # 提取任务数据
 taskdata = scio.loadmat("D:\\fnirs dataset\left right foot tapping\\taskInfo.mat")
@@ -32,7 +34,7 @@ for SubId in range(17, 18):
                 u, omega, corr, IO = utils.myVMD(data=data, fs=fs, ALPHA=ALPHA, K=K)
                 data = u[np.argmin(omega),:].reshape(1, -1)
 
-                image_size = 128
+                image_size = 64
                 gasf = GramianAngularField(image_size=image_size, method='summation')
                 data_gasf = gasf.fit_transform(data)
                 gadf = GramianAngularField(image_size=image_size, method='difference')
@@ -44,9 +46,12 @@ for SubId in range(17, 18):
                 for image, title, ax in zip(images, titles, axs):
                     ax.imshow(image, cmap='rainbow',origin='lower', vmin=-1., vmax=1.)
                     ax.set_title(title)
-                fig.suptitle('SubId={}, taskNum={}, task={}, channel={}'.format(SubId, taskNum, event_desc[event[taskNum] - 1], channel), fontsize=16)
+                fig.suptitle('SubId={}, taskNum={}, task={}\n channel={}, omega={:3f}'.format(SubId, taskNum, event_desc[event[taskNum] - 1], channel, omega[0]), fontsize=16)
                 plt.margins(0, 0)
                 # 保存图片
                 # plt.savefig("GramianAngularField.pdf", pad_inches=0)
                 plt.show()
+
+
+
 
