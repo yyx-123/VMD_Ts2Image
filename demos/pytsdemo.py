@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from pyts.image import GramianAngularField
+from pyts.image import MarkovTransitionField
 import numpy as np
 from scipy.fftpack import fft, fftfreq
 import matplotlib.pyplot as plt
@@ -39,13 +40,19 @@ for SubId in range(17, 18):
                 data_gasf = gasf.fit_transform(data)
                 gadf = GramianAngularField(image_size=image_size, method='difference')
                 data_gadf = gadf.fit_transform(data)
-                images = [data_gasf[0], data_gadf[0]]
-                titles = ['Summation', 'Difference']
+                mtf = MarkovTransitionField(image_size=image_size, n_bins=32)
+                data_mtf = mtf.fit_transform(data)
+                images = [data_gasf[0], data_gadf[0], data_mtf[0]]
+                titles = ['Summation', 'Difference', 'MTF']
 
-                fig, axs = plt.subplots(1, 2, constrained_layout=True)
+                fig, axs = plt.subplots(1, len(titles), constrained_layout=True)
                 for image, title, ax in zip(images, titles, axs):
-                    ax.imshow(image, cmap='rainbow',origin='lower', vmin=-1., vmax=1.)
-                    ax.set_title(title)
+                    if title == 'MTF':
+                        ax.imshow(image, cmap='rainbow', origin='lower', vmin=0., vmax=1.)
+                        ax.set_title(title)
+                    else:
+                        ax.imshow(image, cmap='rainbow',origin='lower', vmin=-1., vmax=1.)
+                        ax.set_title(title)
                 fig.suptitle('SubId={}, taskNum={}, task={}\n channel={}, omega={:3f}'.format(SubId, taskNum, event_desc[event[taskNum] - 1], channel, omega[0]), fontsize=16)
                 plt.margins(0, 0)
                 # 保存图片

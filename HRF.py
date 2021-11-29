@@ -4,6 +4,7 @@ from scipy.special import gamma
 from scipy.signal import convolve as conv
 from math import exp
 from pyts.image import GramianAngularField
+from pyts.image import MarkovTransitionField
 
 Ts = 0.075
 
@@ -59,4 +60,17 @@ def GAF4taskHRF(imgsz=64):
         ax.set_title(title)
     plt.show()
 
-GAF4taskHRF()
+def MTF4taskHRF(imgsz=64):
+    data = task_HRF().reshape(1, -1)
+    image_size = 64
+    mtf = MarkovTransitionField(image_size=image_size, n_bins=32)
+    data_mtf = mtf.fit_transform(data)
+
+    image = data_mtf[0]
+    titles = 'MTF'
+    fig, ax = plt.subplots(1, 1, constrained_layout=True)
+    ax.imshow(image, cmap='rainbow', origin='lower', vmin=0., vmax=1.)
+    ax.set_title(titles)
+    plt.show()
+
+MTF4taskHRF()
