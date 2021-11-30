@@ -73,4 +73,4 @@ def MTF4taskHRF(imgsz=64):
     ax.set_title(titles)
     plt.show()
 
-MTF4taskHRF()
+
