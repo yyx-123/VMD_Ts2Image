@@ -45,7 +45,7 @@ for SubId in range(17, 18):
                 images = [data_gasf[0], data_gadf[0], data_mtf[0]]
                 titles = ['Summation', 'Difference', 'MTF']
 
-                fig, axs = plt.subplots(1, len(titles), constrained_layout=True)
+                fig, axs = plt.subplots(1, 3, constrained_layout=True)
                 for image, title, ax in zip(images, titles, axs):
                     if title == 'MTF':
                         ax.imshow(image, cmap='rainbow', origin='lower', vmin=0., vmax=1.)
