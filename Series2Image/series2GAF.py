@@ -17,7 +17,6 @@ def GenerateGAF(all_ts, window_size, rolling_length, fname, normalize_window_sca
     # 根據我們的滾動大小，將資料切成一組一組
     n_rolling_data = int(np.floor((n - moving_window_size) / rolling_length))
 
-    # 最終的 GAF
     gramian_field = []
 
     # 紀錄價格，用來畫圖

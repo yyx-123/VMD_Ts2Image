@@ -1,8 +1,11 @@
 import os
 import numpy as np
 import pickle
+import torch
 from tqdm import tqdm
+from sklearn.preprocessing import MaxAbsScaler
 from myGAF import series2GAF, visualizeGAFResult
+from pyts.image import MarkovTransitionField
 
 
 
@@ -10,11 +13,15 @@ Ts = 0.075
 LEN = 400
 t = np.linspace(0, Ts * LEN, LEN)
 
+
 IMFDir = "../VMD/IMFs/"
-GAFDir = "GAF/"
+datasetDir = "../dataset/"
+datasetName = "GAF_MTF_64_dataset"
+# GAFDir = "GAFandMTFs/"
+dataset = []
 for SubId in tqdm(range(1, 31)):
     SubDir = str(SubId) + '/'
-    for file in tqdm(os.listdir(IMFDir + SubDir)):
+    for file in os.listdir(IMFDir + SubDir):
         # 读取IMF数据的任务信息
         fileName = file.split('.')[0]
         fileInfo = file.split('.')[0].split('_')
@@ -26,16 +33,33 @@ for SubId in tqdm(range(1, 31)):
         originalIMF = np.load(IMFDir + SubDir + file)
         IMF = originalIMF.reshape(1, -1)
 
-        # 计算GAF
+        # 计算特征(GAF和MTF)并融合
         IMAGE_SIZE = 64
+        BINs = 32
+
         GASF, GADF = series2GAF(ts=IMF, imageSize=IMAGE_SIZE, scale='[0,1]')
+        mtfModel = MarkovTransitionField(image_size=IMAGE_SIZE, n_bins=BINs)
+        MTF = mtfModel.fit_transform(IMF)[0]
+
+        feature = np.stack((GASF, GADF, MTF), axis=0)
+        feature = torch.from_numpy(feature)
+
         # 可视化结果
         # visualizeGAFResult(originalIMF, GASF, GADF, title=fileName)
 
         # 保存结果
-        data = {'series': originalIMF, 'GASF': GASF, 'GADF': GADF}
-        if not os.path.exists(GAFDir + SubDir):
-            os.mkdir(GAFDir + SubDir)
-        with open(GAFDir + SubDir + fileName + '.pickle', 'wb') as f:
-            pickle.dump(data, f)
+        dataInfo = {'SubId':SubId, 'taskNum':taskNum, 'channel':channel}
+        label = int(task)
+        data = (feature, label, dataInfo)
+
+        dataset.append(data)
+        # data = {'GASF': GASF, 'GADF': GADF, 'MTF': MTF}
+        # if not os.path.exists(GAFDir + SubDir):
+        #     os.mkdir(GAFDir + SubDir)
+        # with open(GAFDir + SubDir + fileName + '.pickle', 'wb') as f:
+        #     pickle.dump(data, f)
+
+# 持久化数据
+with open(datasetDir + datasetName + '.pickle', 'wb') as f:
+    pickle.dump(dataset, f)
 

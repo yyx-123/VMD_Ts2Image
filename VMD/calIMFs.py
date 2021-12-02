@@ -6,7 +6,7 @@ import os
 import matplotlib.pyplot as plt
 
 # 提取任务数据
-taskdata = scio.loadmat("..\\dataset\\taskInfo.mat")
+taskdata = scio.loadmat("../dataset/rawData/taskInfo.mat")
 triggers = taskdata['triggers']         # 每一行是一个被试的任务开始采样点编号，30*75
 event = taskdata['event'][0]            # 1 2 3 3 2 1 ... 的序列，描述了任务性质
 event_desc = taskdata['event_desc'][0]  # 对1、2、3的描述
