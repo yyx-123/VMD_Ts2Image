@@ -45,7 +45,7 @@ class ResNet50_cls(nn.Module):
         self.FC2.apply(fc_init_weights)
 
     def forward(self, x):
-
+        x = x.type(torch.FloatTensor).to(torch.device('cuda'))
         x = self.encoder(x)
         # print(x.shape)
         x = x.view(x.size(0), -1)
@@ -56,4 +56,5 @@ class ResNet50_cls(nn.Module):
 
         logits = self.FC2(x)
 
-        return e, logits
+        #return e, logits
+        return F.log_softmax(logits, dim=1)

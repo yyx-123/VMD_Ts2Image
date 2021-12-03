@@ -57,4 +57,4 @@ class ResNet18_cls(nn.Module):
         logits = self.FC2(x)
 
         # return e, logits
-        return logits
+        return F.log_softmax(logits, dim=1)

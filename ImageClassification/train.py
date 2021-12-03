@@ -5,6 +5,7 @@ import torch.nn as nn
 import torch.optim as optim
 import torch.nn.functional as F
 import numpy as np
+from tqdm import tqdm
 from torch.utils.data.dataloader import DataLoader
 from models.ResNet18_cls import ResNet18_cls
 
@@ -13,9 +14,9 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 print("using " + device.type)
 
 # 加载、划分数据集
-print("loading dataset....")
-dataset = MyDataset(path='../dataset/GAF_MTF_64_dataset.pickle')
-print(len(dataset))
+datasetName = 'GAF_MTF_24_dataset.pickle'
+print("loading dataset", datasetName, "....")
+dataset = MyDataset(path='../dataset/images/' + datasetName)
 
 TRAIN_PERCENT = 0.8
 TEST_PERCENT = 1 - TRAIN_PERCENT
@@ -23,16 +24,18 @@ train_size = int(TRAIN_PERCENT * len(dataset))
 test_size = len(dataset) - train_size
 train_dataset, test_dataset = torch.utils.data.random_split(dataset, [train_size, test_size])
 
-BATCH_SIZE = 64
+BATCH_SIZE = 256
 train_dataLoader = DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True)
 test_dataLoader = DataLoader(test_dataset, batch_size=BATCH_SIZE, shuffle=True)
 
 # 加载模型
+print("loading model ...")
 model = ResNet18_cls(clsNum=3).to(device)
 
 # 训练
+print("start training ...")
 EPOCH_NUM = 128
-LEARNING_RATE = 0.0001
+LEARNING_RATE = 3e-4
 WEIGHT_DECAY = 5e-4
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=LEARNING_RATE, weight_decay=WEIGHT_DECAY)
@@ -53,13 +56,15 @@ for epoch in range(EPOCH_NUM):
     model.eval()
     correct_cnt = 0
     confusion = np.zeros([3, 3])
-    for test_data in test_dataLoader:
+    for test_data, test_label in test_dataLoader:
         test_data = test_data.to(device)
+        test_label = test_label.to(device)
+
         out = model(test_data)
         pred = torch.max(out, dim=1).indices
-        for idx in range(len(test_data['y'])):
+        for idx in range(len(test_label)):
             # 使用混淆矩阵计算
-            confusion[test_data['y'][idx]][pred[idx]] += 1
+            confusion[test_label[idx]][pred[idx]] += 1
             # 三分类
             # if pred[idx] == test_data['y'][idx]:
             #     correct_cnt += 1
