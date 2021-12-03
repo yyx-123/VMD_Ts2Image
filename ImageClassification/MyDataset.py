@@ -13,13 +13,14 @@ class MyDataset(Dataset):
         data = self.dataset[index][0]
         task = self.dataset[index][1]
 
-        if task == 1:
-            label = np.array([1, 0, 0])
-        elif task == 2:
-            label = np.array([0, 1, 0])
-        else:
-            label = np.array([0, 0, 1])
-        label = torch.from_numpy(label)
+        label = task - 1
+        # if task == 1:
+        #     label = np.array([1, 0, 0])
+        # elif task == 2:
+        #     label = np.array([0, 1, 0])
+        # else:
+        #     label = np.array([0, 0, 1])
+        # label = torch.from_numpy(label)
 
         return data, label
 
@@ -31,8 +32,4 @@ class MyDataset(Dataset):
             dataset = pickle.load(f)
         return dataset
 
-
-if __name__ == "__main__":
-    dataset = MyDataset('../dataset/GAF_MTF_64_dataset.pickle')
-    print(len(dataset))
 
