@@ -39,7 +39,7 @@ for SubId in range(1, 31):
                 u = u[np.argmin(omega), :]
 
                 # 保存结果
-                tgtDir = "..\VMD\IMFs\\"
+                tgtDir = "..\dataset\IMFs\\"
                 if not os.path.exists(tgtDir + SubDir):
                     os.mkdir(tgtDir + SubDir)
                 fileName = "taskNum={}_task={}_channel={}".format(taskNum, event[taskNum], channel)
