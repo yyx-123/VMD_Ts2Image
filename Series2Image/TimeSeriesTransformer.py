@@ -88,38 +88,69 @@ class TimeSeriesTransformer():
 
         return tanhMappingSum, tanhMappingDiff
 
+    def visualize(self, mode='Sum'):
+        plt.subplot(3,2,1)
+        plt.plot(self.ts[0])
+        plt.title('original time seires')
+
+        GASF, GADF = self.GAF()
+        nonMappingSum, nonMappingDiff = self.nonMapping()
+        sigmoidSum, sigmoidDiff = self.sigmoidMapping()
+        tanSum, tanDiff = self.tanMapping()
+        tanhSum, tanhDiff = self.tanhMapping()
+
+        if mode == 'Sum':
+            plt.suptitle('Sum mode')
+
+            plt.subplot(3,2,2)
+            plt.imshow(GASF)
+            plt.title('GAF')
+
+            plt.subplot(3,2,3)
+            plt.imshow(nonMappingSum)
+            plt.title('nonMapping')
+
+            plt.subplot(3,2,4)
+            plt.imshow(sigmoidSum)
+            plt.title('sigmoid')
+
+            plt.subplot(3,2,5)
+            plt.imshow(tanSum)
+            plt.title('tan')
+
+            plt.subplot(3,2,6)
+            plt.imshow(tanhSum)
+            plt.title('tanh')
+        elif mode == 'Diff':
+            plt.suptitle('Diff mode')
+
+            plt.subplot(3, 2, 2)
+            plt.imshow(GADF)
+            plt.title('GAF')
+
+            plt.subplot(3, 2, 3)
+            plt.imshow(nonMappingDiff)
+            plt.title('nonMapping')
+
+            plt.subplot(3, 2, 4)
+            plt.imshow(sigmoidDiff)
+            plt.title('sigmoid')
+
+            plt.subplot(3, 2, 5)
+            plt.imshow(tanDiff)
+            plt.title('tan')
+
+            plt.subplot(3, 2, 6)
+            plt.imshow(tanhDiff)
+            plt.title('tanh')
+
+        plt.show()
+
 
 if __name__=='__main__':
     x = np.array([1, 2, 3, 4, 5])
     transformer = TimeSeriesTransformer(ts=x, imageSize=5)
+    transformer.visualize(mode='Diff')
 
-    plt.subplot(3,2,1)
-    plt.title('GASF')
-    S1, _ = transformer.GAF()
-    plt.imshow(S1)
-
-
-    plt.subplot(3, 2, 3)
-    plt.title('nonMapping')
-    S3, _ = transformer.nonMapping()
-    plt.imshow(S3)
-
-    plt.subplot(3, 2, 4)
-    plt.title('sigmoidMapping')
-    S4, _ = transformer.sigmoidMapping()
-    plt.imshow(S4)
-
-    plt.subplot(3, 2, 5)
-    plt.title('tanMapping')
-    S5, _ = transformer.tanMapping()
-    plt.imshow(S5)
-
-
-    plt.subplot(3, 2, 6)
-    plt.title('tanhMapping')
-    S6, _ = transformer.tanhMapping()
-    plt.imshow(S6)
-
-    plt.show()
 
 

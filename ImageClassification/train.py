@@ -1,4 +1,4 @@
-import torch
+import os
 from MyDataset import MyDataset
 import torch
 import torch.nn as nn
@@ -78,3 +78,15 @@ def train(datasetName):
     resultDIr = "../results/"
     with open(resultDIr + datasetName + ".txt", 'w') as result:
         result.write(msg)
+
+if __name__ == '__main__':
+    datasetPath = "../dataset/images/"
+    features = ['GAF_MTF', 'MTF_nonMapping', 'MTF_sigmoid', 'MTF_tan', 'MTF_tanh']
+    imageSizes = [16, 32, 48, 64]
+
+    for feature in features:
+        for imageSize in imageSizes:
+            datasetName = feature + '_' + str(imageSize)
+            if datasetName + '.txt' in os.listdir('../results'):
+                continue
+            train(datasetName)
