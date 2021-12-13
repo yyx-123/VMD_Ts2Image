@@ -5,7 +5,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torch.nn.init as init
 from torch.autograd import Function
-from torchvision import models
+from .MyResnet import resnet18
 
 
 def weights_init_kaiming(m):
@@ -22,10 +22,9 @@ def fc_init_weights(m):
 
 
 class ResNet18_cls(nn.Module):
-    def __init__(self, clsNum, dim=128):
+    def __init__(self, clsNum, inFeatNum, dim=128):
         super().__init__()
-
-        resnet = models.resnet18(pretrained=True)
+        resnet = resnet18(inFeatNum=inFeatNum, pretrained=False, progress=True)
 
         self.encoder = nn.Sequential(
             resnet.conv1,

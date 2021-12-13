@@ -18,6 +18,7 @@ def train(datasetName):
     # 加载、划分数据集
     print("loading dataset", datasetName, "....")
     dataset = MyDataset(path='../dataset/images/' + datasetName + ".pickle")
+    inputFeatureNum = dataset[0][0].shape[0]
 
     TRAIN_PERCENT = 0.8
     TEST_PERCENT = 1 - TRAIN_PERCENT
@@ -26,12 +27,12 @@ def train(datasetName):
     train_dataset, test_dataset = torch.utils.data.random_split(dataset, [train_size, test_size])
 
     BATCH_SIZE = 256
-    train_dataLoader = DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True)
-    test_dataLoader = DataLoader(test_dataset, batch_size=BATCH_SIZE, shuffle=True)
+    train_dataLoader = DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True, num_workers=2)
+    test_dataLoader = DataLoader(test_dataset, batch_size=BATCH_SIZE, shuffle=True, num_workers=2)
 
     # 加载模型
     print("loading model ...")
-    model = ResNet18_cls(clsNum=3).to(device)
+    model = ResNet18_cls(clsNum=3, inFeatNum=inputFeatureNum).to(device)
 
     # 训练
     print("start training ...")
@@ -81,12 +82,10 @@ def train(datasetName):
 
 if __name__ == '__main__':
     datasetPath = "../dataset/images/"
-    features = ['GAF_MTF', 'MTF_nonMapping', 'MTF_sigmoid', 'MTF_tan', 'MTF_tanh']
-    imageSizes = [16, 32, 48, 64]
+    features = ['MTF_nonMapping']
+    imageSizes = [32, 64]
 
     for feature in features:
         for imageSize in imageSizes:
             datasetName = feature + '_' + str(imageSize)
-            if datasetName + '.txt' in os.listdir('../results'):
-                continue
             train(datasetName)
