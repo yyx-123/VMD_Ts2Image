@@ -1,4 +1,5 @@
-from MyDataset import MyDataset
+import os
+from TsDataset import TsDataset
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -7,30 +8,29 @@ import numpy as np
 import utils
 from tqdm import tqdm
 from torch.utils.data.dataloader import DataLoader
-from models.ResNet18_cls import ResNet18_cls
+from models.Simple1DConv import Simple1DConv
 
 
-def train(datasetName):
+def train():
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     print("using " + device.type)
 
     # 加载、划分数据集
-    print("loading dataset", datasetName, "....")
-    dataset = MyDataset(path='../dataset/images/' + datasetName + ".pickle")
-    inputFeatureNum = dataset[0][0].shape[0]
+    print("loading dataset....")
+    dataset = TsDataset()
 
     TRAIN_PERCENT = 0.8
     train_size = int(TRAIN_PERCENT * len(dataset))
     test_size = len(dataset) - train_size
     train_dataset, test_dataset = torch.utils.data.random_split(dataset, [train_size, test_size])
 
-    BATCH_SIZE = 256
+    BATCH_SIZE = 10
     train_dataLoader = DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True, num_workers=2)
     test_dataLoader = DataLoader(test_dataset, batch_size=BATCH_SIZE, shuffle=True, num_workers=2)
 
     # 加载模型
     print("loading model ...")
-    model = ResNet18_cls(clsNum=3, inFeatNum=inputFeatureNum).to(device)
+    model = Simple1DConv(clsNum=3).to(device)
 
     # 训练
     print("start training ...")
@@ -75,15 +75,8 @@ def train(datasetName):
 
     # 记录结果
     resultDIr = "../results/"
-    with open(resultDIr + datasetName + ".txt", 'w') as result:
+    with open(resultDIr + model.name + ".txt", 'w') as result:
         result.write(msg)
 
 if __name__ == '__main__':
-    datasetPath = "../dataset/images/"
-    features = ['GAF_MTF']
-    imageSizes = [32, 64]
-
-    for feature in features:
-        for imageSize in imageSizes:
-            datasetName = feature + '_' + str(imageSize)
-            train(datasetName)
+    train()
