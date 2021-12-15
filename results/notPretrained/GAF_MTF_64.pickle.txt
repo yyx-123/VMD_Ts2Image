@@ -1,0 +1,80 @@
+Epoch: 0 | loss:1.01 | acc:0.4249 | prec0:0.4436 | prec1:0.3924 | prec2:0.6262 | recall0:0.3702  | recall1:0.7605 | recall2:0.1460
+Epoch: 1 | loss:0.98 | acc:0.4864 | prec0:0.4605 | prec1:0.4681 | prec2:0.5418 | recall0:0.5478  | recall1:0.4433 | recall2:0.4685
+Epoch: 2 | loss:0.94 | acc:0.5145 | prec0:0.4675 | prec1:0.5218 | prec2:0.5817 | recall0:0.6539  | recall1:0.3690 | recall2:0.5210
+Epoch: 3 | loss:0.83 | acc:0.5392 | prec0:0.5592 | prec1:0.5164 | prec2:0.5449 | recall0:0.4959  | recall1:0.5428 | recall2:0.5784
+Epoch: 4 | loss:1.00 | acc:0.5438 | prec0:0.5453 | prec1:0.5131 | prec2:0.5795 | recall0:0.4955  | recall1:0.5901 | recall2:0.5456
+Epoch: 5 | loss:0.66 | acc:0.5772 | prec0:0.5260 | prec1:0.6025 | prec2:0.6244 | recall0:0.6648  | recall1:0.4887 | recall2:0.5784
+Epoch: 6 | loss:0.67 | acc:0.5791 | prec0:0.5606 | prec1:0.5725 | prec2:0.6045 | recall0:0.5816  | recall1:0.5514 | recall2:0.6041
+Epoch: 7 | loss:0.33 | acc:0.5755 | prec0:0.5312 | prec1:0.5970 | prec2:0.6200 | recall0:0.6945  | recall1:0.4666 | recall2:0.5657
+Epoch: 8 | loss:0.25 | acc:0.5809 | prec0:0.5335 | prec1:0.5721 | prec2:0.6654 | recall0:0.6911  | recall1:0.5135 | recall2:0.5385
+Epoch: 9 | loss:0.87 | acc:0.5795 | prec0:0.5867 | prec1:0.5729 | prec2:0.5792 | recall0:0.5523  | recall1:0.5593 | recall2:0.6264
+Epoch:10 | loss:0.28 | acc:0.5866 | prec0:0.5492 | prec1:0.5666 | prec2:0.6788 | recall0:0.6576  | recall1:0.6167 | recall2:0.4864
+Epoch:11 | loss:0.24 | acc:0.5856 | prec0:0.5418 | prec1:0.6087 | prec2:0.6236 | recall0:0.6776  | recall1:0.4951 | recall2:0.5844
+Epoch:12 | loss:0.28 | acc:0.6027 | prec0:0.5623 | prec1:0.6083 | prec2:0.6505 | recall0:0.6685  | recall1:0.5619 | recall2:0.5780
+Epoch:13 | loss:0.19 | acc:0.6017 | prec0:0.5733 | prec1:0.5816 | prec2:0.6614 | recall0:0.6618  | recall1:0.5683 | recall2:0.5754
+Epoch:14 | loss:0.17 | acc:0.6018 | prec0:0.6207 | prec1:0.5814 | prec2:0.6052 | recall0:0.5628  | recall1:0.5875 | recall2:0.6547
+Epoch:15 | loss:0.40 | acc:0.5966 | prec0:0.6057 | prec1:0.6370 | prec2:0.5664 | recall0:0.5801  | recall1:0.4809 | recall2:0.7277
+Epoch:16 | loss:0.13 | acc:0.6076 | prec0:0.5937 | prec1:0.6241 | prec2:0.6083 | recall0:0.6294  | recall1:0.5267 | recall2:0.6663
+Epoch:17 | loss:0.05 | acc:0.6070 | prec0:0.5838 | prec1:0.6016 | prec2:0.6376 | recall0:0.6223  | recall1:0.5833 | recall2:0.6153
+Epoch:18 | loss:0.03 | acc:0.6096 | prec0:0.6046 | prec1:0.5766 | prec2:0.6528 | recall0:0.6287  | recall1:0.6036 | recall2:0.5966
+Epoch:19 | loss:0.36 | acc:0.6078 | prec0:0.5981 | prec1:0.5887 | prec2:0.6384 | recall0:0.6091  | recall1:0.6029 | recall2:0.6115
+Epoch:20 | loss:0.11 | acc:0.6032 | prec0:0.5854 | prec1:0.6245 | prec2:0.6036 | recall0:0.6200  | recall1:0.5394 | recall2:0.6499
+Epoch:21 | loss:0.01 | acc:0.6040 | prec0:0.5563 | prec1:0.5895 | prec2:0.6962 | recall0:0.6670  | recall1:0.6070 | recall2:0.5385
+Epoch:22 | loss:0.14 | acc:0.5992 | prec0:0.6333 | prec1:0.5331 | prec2:0.6675 | recall0:0.5263  | recall1:0.7016 | recall2:0.5698
+Epoch:23 | loss:0.44 | acc:0.6052 | prec0:0.5528 | prec1:0.6262 | prec2:0.6618 | recall0:0.7186  | recall1:0.5049 | recall2:0.5926
+Epoch:24 | loss:0.04 | acc:0.6083 | prec0:0.6201 | prec1:0.5811 | prec2:0.6253 | recall0:0.5730  | recall1:0.6077 | recall2:0.6439
+Epoch:25 | loss:0.05 | acc:0.6135 | prec0:0.6415 | prec1:0.6105 | prec2:0.5955 | recall0:0.5621  | recall1:0.5612 | recall2:0.7162
+Epoch:26 | loss:0.17 | acc:0.6040 | prec0:0.5916 | prec1:0.6246 | prec2:0.6012 | recall0:0.6245  | recall1:0.4929 | recall2:0.6939
+Epoch:27 | loss:0.19 | acc:0.6123 | prec0:0.5878 | prec1:0.6243 | prec2:0.6284 | recall0:0.6501  | recall1:0.5176 | recall2:0.6689
+Epoch:28 | loss:0.05 | acc:0.6146 | prec0:0.5672 | prec1:0.6312 | prec2:0.6625 | recall0:0.7017  | recall1:0.5319 | recall2:0.6104
+Epoch:29 | loss:0.19 | acc:0.6202 | prec0:0.5971 | prec1:0.5890 | prec2:0.6912 | recall0:0.6535  | recall1:0.6374 | recall2:0.5702
+Epoch:30 | loss:0.19 | acc:0.6192 | prec0:0.6030 | prec1:0.6265 | prec2:0.6294 | recall0:0.6411  | recall1:0.5604 | recall2:0.6559
+Epoch:31 | loss:0.65 | acc:0.6163 | prec0:0.6237 | prec1:0.5709 | prec2:0.6628 | recall0:0.5910  | recall1:0.6378 | recall2:0.6201
+Epoch:32 | loss:0.12 | acc:0.6087 | prec0:0.6038 | prec1:0.5829 | prec2:0.6403 | recall0:0.6008  | recall1:0.5953 | recall2:0.6298
+Epoch:33 | loss:0.06 | acc:0.6121 | prec0:0.5928 | prec1:0.5867 | prec2:0.6639 | recall0:0.6381  | recall1:0.6032 | recall2:0.5952
+Epoch:34 | loss:0.13 | acc:0.6086 | prec0:0.5970 | prec1:0.5713 | prec2:0.6725 | recall0:0.6238  | recall1:0.6404 | recall2:0.5620
+Epoch:35 | loss:0.02 | acc:0.6183 | prec0:0.6128 | prec1:0.6041 | prec2:0.6378 | recall0:0.6377  | recall1:0.5837 | recall2:0.6335
+Epoch:36 | loss:0.12 | acc:0.6090 | prec0:0.6627 | prec1:0.5895 | prec2:0.5925 | recall0:0.4981  | recall1:0.6047 | recall2:0.7229
+Epoch:37 | loss:0.22 | acc:0.6166 | prec0:0.6283 | prec1:0.5823 | prec2:0.6434 | recall0:0.5839  | recall1:0.6348 | recall2:0.6309
+Epoch:38 | loss:0.06 | acc:0.6198 | prec0:0.5919 | prec1:0.6184 | prec2:0.6529 | recall0:0.6674  | recall1:0.5511 | recall2:0.6410
+Epoch:39 | loss:0.07 | acc:0.6191 | prec0:0.6072 | prec1:0.5920 | prec2:0.6610 | recall0:0.6136  | recall1:0.6160 | recall2:0.6276
+Epoch:40 | loss:0.13 | acc:0.6133 | prec0:0.5943 | prec1:0.5911 | prec2:0.6594 | recall0:0.6211  | recall1:0.6111 | recall2:0.6078
+Epoch:41 | loss:0.41 | acc:0.5987 | prec0:0.5688 | prec1:0.6414 | prec2:0.6001 | recall0:0.6482  | recall1:0.4869 | recall2:0.6607
+Epoch:42 | loss:0.07 | acc:0.6186 | prec0:0.6253 | prec1:0.5928 | prec2:0.6384 | recall0:0.5813  | recall1:0.6160 | recall2:0.6581
+Epoch:43 | loss:0.08 | acc:0.6258 | prec0:0.6188 | prec1:0.6286 | prec2:0.6298 | recall0:0.6163  | recall1:0.5687 | recall2:0.6920
+Epoch:44 | loss:0.08 | acc:0.6161 | prec0:0.6213 | prec1:0.6124 | prec2:0.6143 | recall0:0.6234  | recall1:0.5541 | recall2:0.6704
+Epoch:45 | loss:0.16 | acc:0.6230 | prec0:0.6286 | prec1:0.5993 | prec2:0.6418 | recall0:0.6106  | recall1:0.6175 | recall2:0.6406
+Epoch:46 | loss:0.01 | acc:0.6130 | prec0:0.6164 | prec1:0.6015 | prec2:0.6199 | recall0:0.5899  | recall1:0.5717 | recall2:0.6767
+Epoch:47 | loss:0.06 | acc:0.6211 | prec0:0.6064 | prec1:0.6053 | prec2:0.6546 | recall0:0.6550  | recall1:0.5998 | recall2:0.6086
+Epoch:48 | loss:0.03 | acc:0.6113 | prec0:0.6144 | prec1:0.6020 | prec2:0.6169 | recall0:0.5952  | recall1:0.5762 | recall2:0.6622
+Epoch:49 | loss:0.16 | acc:0.6133 | prec0:0.6093 | prec1:0.5917 | prec2:0.6384 | recall0:0.6283  | recall1:0.5751 | recall2:0.6365
+Epoch:50 | loss:0.10 | acc:0.6142 | prec0:0.6208 | prec1:0.6021 | prec2:0.6195 | recall0:0.5692  | recall1:0.5923 | recall2:0.6804
+Epoch:51 | loss:0.03 | acc:0.6226 | prec0:0.5915 | prec1:0.6281 | prec2:0.6521 | recall0:0.6580  | recall1:0.5597 | recall2:0.6499
+Epoch:52 | loss:0.01 | acc:0.6223 | prec0:0.6414 | prec1:0.6021 | prec2:0.6252 | recall0:0.5862  | recall1:0.6089 | recall2:0.6715
+Epoch:53 | loss:0.03 | acc:0.6217 | prec0:0.6099 | prec1:0.6019 | prec2:0.6558 | recall0:0.6275  | recall1:0.6175 | recall2:0.6201
+Epoch:54 | loss:0.25 | acc:0.6241 | prec0:0.6189 | prec1:0.6156 | prec2:0.6365 | recall0:0.6050  | recall1:0.5938 | recall2:0.6730
+Epoch:55 | loss:0.07 | acc:0.6210 | prec0:0.6416 | prec1:0.5916 | prec2:0.6332 | recall0:0.5677  | recall1:0.6291 | recall2:0.6655
+Epoch:56 | loss:0.05 | acc:0.6247 | prec0:0.6179 | prec1:0.6287 | prec2:0.6274 | recall0:0.6053  | recall1:0.5766 | recall2:0.6916
+Epoch:57 | loss:0.13 | acc:0.6242 | prec0:0.6023 | prec1:0.6027 | prec2:0.6732 | recall0:0.6257  | recall1:0.6303 | recall2:0.6168
+Epoch:58 | loss:0.08 | acc:0.6091 | prec0:0.6067 | prec1:0.5632 | prec2:0.6752 | recall0:0.5989  | recall1:0.6603 | recall2:0.5683
+Epoch:59 | loss:0.06 | acc:0.6252 | prec0:0.6505 | prec1:0.5934 | prec2:0.6356 | recall0:0.5764  | recall1:0.6239 | recall2:0.6749
+Epoch:60 | loss:0.15 | acc:0.6227 | prec0:0.5935 | prec1:0.6065 | prec2:0.6765 | recall0:0.6558  | recall1:0.6081 | recall2:0.6045
+Epoch:61 | loss:0.15 | acc:0.6237 | prec0:0.5923 | prec1:0.6115 | prec2:0.6731 | recall0:0.6471  | recall1:0.5991 | recall2:0.6250
+Epoch:62 | loss:0.04 | acc:0.6266 | prec0:0.6451 | prec1:0.5740 | prec2:0.6752 | recall0:0.5737  | recall1:0.6772 | recall2:0.6287
+Epoch:63 | loss:0.01 | acc:0.6196 | prec0:0.6028 | prec1:0.6118 | prec2:0.6446 | recall0:0.6230  | recall1:0.5980 | recall2:0.6376
+Epoch:64 | loss:0.05 | acc:0.6236 | prec0:0.6120 | prec1:0.6176 | prec2:0.6410 | recall0:0.6343  | recall1:0.5893 | recall2:0.6469
+Epoch:65 | loss:0.34 | acc:0.6112 | prec0:0.6227 | prec1:0.6065 | prec2:0.6060 | recall0:0.5688  | recall1:0.5785 | recall2:0.6857
+Epoch:66 | loss:0.15 | acc:0.6148 | prec0:0.5892 | prec1:0.6272 | prec2:0.6321 | recall0:0.6539  | recall1:0.5634 | recall2:0.6272
+Epoch:67 | loss:0.15 | acc:0.6158 | prec0:0.5954 | prec1:0.6447 | prec2:0.6150 | recall0:0.6482  | recall1:0.5176 | recall2:0.6812
+Epoch:68 | loss:0.00 | acc:0.6252 | prec0:0.6276 | prec1:0.6268 | prec2:0.6219 | recall0:0.5948  | recall1:0.5856 | recall2:0.6946
+Epoch:69 | loss:0.29 | acc:0.6153 | prec0:0.5794 | prec1:0.6347 | prec2:0.6398 | recall0:0.6655  | recall1:0.5465 | recall2:0.6339
+Epoch:70 | loss:0.03 | acc:0.6153 | prec0:0.5757 | prec1:0.6136 | prec2:0.6685 | recall0:0.6727  | recall1:0.5758 | recall2:0.5978
+Epoch:71 | loss:0.05 | acc:0.6168 | prec0:0.5958 | prec1:0.5965 | prec2:0.6605 | recall0:0.6433  | recall1:0.5732 | recall2:0.6339
+Epoch:72 | loss:0.14 | acc:0.6247 | prec0:0.6153 | prec1:0.6234 | prec2:0.6346 | recall0:0.6174  | recall1:0.5792 | recall2:0.6771
+Epoch:73 | loss:0.09 | acc:0.6296 | prec0:0.6338 | prec1:0.6109 | prec2:0.6434 | recall0:0.5997  | recall1:0.6111 | recall2:0.6775
+Epoch:74 | loss:0.09 | acc:0.6157 | prec0:0.5768 | prec1:0.6201 | prec2:0.6580 | recall0:0.6595  | recall1:0.5649 | recall2:0.6227
+Epoch:75 | loss:0.01 | acc:0.6193 | prec0:0.6126 | prec1:0.5881 | prec2:0.6595 | recall0:0.6038  | recall1:0.6141 | recall2:0.6399
+Epoch:76 | loss:0.01 | acc:0.6255 | prec0:0.6040 | prec1:0.6349 | prec2:0.6391 | recall0:0.6422  | recall1:0.5743 | recall2:0.6596
+Epoch:77 | loss:0.36 | acc:0.6222 | prec0:0.5973 | prec1:0.6295 | prec2:0.6419 | recall0:0.6411  | recall1:0.5758 | recall2:0.6495
+Epoch:78 | loss:0.02 | acc:0.6113 | prec0:0.6276 | prec1:0.5900 | prec2:0.6171 | recall0:0.5839  | recall1:0.5882 | recall2:0.6615
+Epoch:79 | loss:0.06 | acc:0.6207 | prec0:0.6327 | prec1:0.5909 | prec2:0.6403 | recall0:0.5794  | recall1:0.6212 | recall2:0.6611

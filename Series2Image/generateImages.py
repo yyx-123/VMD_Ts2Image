@@ -13,7 +13,7 @@ t = np.linspace(0, Ts * LEN, LEN)
 
 IMFDir = "../dataset/IMFs/"
 datasetDir = "../dataset/images/"
-imagesize = [16, 24, 32, 40, 48, 56, 64]
+imagesize = [16, 32, 64]
 for sz in imagesize:
     dataset = []
     for SubId in tqdm(range(1, 31)):
@@ -33,7 +33,7 @@ for sz in imagesize:
             # 有选择性的计算特征(GAF、MTF、tan、tanh、sigmoid、nonmapping)并融合
             featureSel = {'GAF': False,
                           'MTF': True,
-                          'tan': True,
+                          'tan': False,
                           'tanh': False,
                           'sigmoid': False,
                           'nonMapping': False
