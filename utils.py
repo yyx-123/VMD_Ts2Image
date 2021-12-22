@@ -1,3 +1,7 @@
+import matplotlib.pyplot as plt
+import numpy as np
+import os
+
 def calRecall(confusion):
     recall0 = confusion[0][0] / confusion[0].sum()
     recall1 = confusion[1][1] / confusion[1].sum()

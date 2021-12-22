@@ -12,8 +12,9 @@ t = np.linspace(0, Ts * LEN, LEN)
 
 
 IMFDir = "../dataset/IMFs/"
-datasetDir = "../dataset/images/"
-imagesize = [16, 32, 64]
+
+imageDir = "../dataset/images/"
+imagesize = [32, 64]
 for sz in imagesize:
     dataset = []
     for SubId in tqdm(range(1, 31)):
@@ -25,18 +26,17 @@ for sz in imagesize:
             taskNum = fileInfo[0].split('=')[1]
             task = fileInfo[1].split('=')[1]
             channel = fileInfo[2].split('=')[1]
-
-            # 读取IMF
+            # 读取IMF数据
             originalIMF = np.load(IMFDir + SubDir + file)
             IMF = originalIMF.reshape(1, -1)
 
             # 有选择性的计算特征(GAF、MTF、tan、tanh、sigmoid、nonmapping)并融合
             featureSel = {'GAF': False,
-                          'MTF': True,
+                          'MTF': False,
                           'tan': False,
                           'tanh': False,
                           'sigmoid': False,
-                          'nonMapping': False
+                          'linear': True
                           }
             IMAGE_SIZE = sz
             BINs = 32
@@ -68,24 +68,29 @@ for sz in imagesize:
                 features.append(sigmoidMappingSum)
                 features.append(sigmoidMappingDiff)
                 datasetName += "sigmoid_"
-            if featureSel['nonMapping']:
-                nonMappingSum, nonMappingDiff = transformer.nonMapping()
-                features.append(nonMappingSum)
-                features.append(nonMappingDiff)
-                datasetName += "nonMapping_"
+            if featureSel['linear']:
+                linearSum, linearDiff = transformer.linear()
+                features.append(linearSum)
+                features.append(linearDiff)
+                datasetName += "linear_"
 
             feature = np.stack(tuple(features), axis=0)
             feature = torch.from_numpy(feature)
 
-            # 保存结果
+            # 把当前一个file(.npy)的结果保存到总的dataset中
             dataInfo = {'SubId':SubId, 'taskNum':taskNum, 'channel':channel}
             label = int(task)
             data = (feature, label, dataInfo)
             dataset.append(data)
 
-    # 持久化数据
-    datasetName += str(sz)
-    print(datasetName)
-    with open(datasetDir + datasetName + '.pickle', 'wb') as f:
-        pickle.dump(dataset, f)
+        # 持久化数据，这里是对每一个Sub的数据分别创立一个数据集，如果需要对全部被试创建数据集则需要将以下内容移至更外一层
+        datasetName += str(sz)
+        print(datasetName)
+
+        tgtDir = imageDir + 'SubImages/' + SubDir
+        if not os.path.exists(tgtDir):
+            os.makedirs(tgtDir)
+
+        with open(tgtDir + datasetName + '.pickle', 'wb') as f:
+            pickle.dump(dataset, f)
 

@@ -4,6 +4,7 @@ from scipy.special import comb
 import numpy as np
 import matplotlib.pyplot as plt
 from vmdpy import VMD
+import os
 
 def findBestK(data, fs, ALPHA, Kmin=2, Kmax=10,TAU=0.00001, DC=0, INIT=0, TOL=1e-7):
     '''
@@ -139,3 +140,28 @@ def IO(data, u):
             for k in range(j + 1, K):
                     IO += u[j, :][t] * u[k, :][t] / sum
     return IO
+
+# 可以根据SubId, taskNum, channel参数找到IMF，并将其可视化
+def showIMF(SubId, taskNum, channel):
+    dir = 'dataset/IMFs/' + str(SubId) + '/'
+    for file in os.listdir(dir):
+        info = file.split('.')[0]
+        taskN = int(info.split('_')[0].split('=')[1])
+        taskDesc = int(info.split('_')[1].split('=')[1])
+        if taskDesc == 1:
+            task = 'RHT'
+        elif taskDesc == 2:
+            task = 'LHT'
+        else:
+            task = 'FT'
+        ch = int(info.split('_')[2].split('=')[1])
+
+        if taskN == taskNum and ch == channel:
+            break
+
+    IMF = np.load(dir + file)
+    Ts = 0.075
+    t = np.linspace(start=0, stop=30, num=int(30 / Ts))
+    plt.plot(t, IMF)
+    plt.title('SubID={}, taskNum={}, task={}, channel={}'.format(SubId, taskNum, task, channel))
+    plt.show()

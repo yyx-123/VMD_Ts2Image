@@ -48,7 +48,7 @@ class TimeSeriesTransformer():
 
         return MTF
 
-    def nonMapping(self, lowerBound=-0.5, higherBound=0.5):
+    def linear(self, lowerBound=-0.5, higherBound=0.5):
         # step 1、2: 标准化时间序列、PAA压缩长度
         x = self.normalizeAndCompactTs(lowerBound=lowerBound, higherBound=higherBound)
         I = np.ones(len(x)).reshape(-1, 1)
@@ -94,7 +94,7 @@ class TimeSeriesTransformer():
         plt.title('original time seires')
 
         GASF, GADF = self.GAF()
-        nonMappingSum, nonMappingDiff = self.nonMapping()
+        nonMappingSum, nonMappingDiff = self.linear()
         sigmoidSum, sigmoidDiff = self.sigmoidMapping()
         tanSum, tanDiff = self.tanMapping()
         tanhSum, tanhDiff = self.tanhMapping()
