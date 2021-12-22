@@ -10,13 +10,13 @@ from torch.utils.data.dataloader import DataLoader
 from models.ResNet18_cls import ResNet18_cls
 
 
-def train(datasetName):
+def train(datasetName, SubId=None):
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     print("using " + device.type)
 
     # 加载、划分数据集
     print("loading dataset", datasetName, "....")
-    dataset = MyDataset(path='../dataset/images/' + datasetName + ".pickle")
+    dataset = MyDataset(datasetName=datasetName, path='../dataset/images/', SubId=SubId)
     inputFeatureNum = dataset[0][0].shape[0]
 
     TRAIN_PERCENT = 0.8
@@ -74,16 +74,17 @@ def train(datasetName):
               .format(epoch, loss_train, acc, prec0, prec1, prec2, recall0, recall1, recall2)
 
     # 记录结果
-    resultDIr = "../results/"
-    with open(resultDIr + datasetName + ".txt", 'w') as result:
-        result.write(msg)
+    # resultDIr = "../results/"
+    # with open(resultDIr + datasetName + ".txt", 'w') as result:
+    #     result.write(msg)
+    print(msg)
 
 if __name__ == '__main__':
-    datasetPath = "../dataset/images/"
-    features = ['GAF_MTF']
+    datasetPath = "../dataset/images/SubImages/"
+    features = ['linear']
     imageSizes = [32, 64]
 
     for feature in features:
         for imageSize in imageSizes:
             datasetName = feature + '_' + str(imageSize)
-            train(datasetName)
+            train(datasetName, SubId=5)

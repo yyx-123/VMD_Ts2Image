@@ -5,10 +5,14 @@ import torch
 from torch.utils.data import Dataset
 
 class MyDataset(Dataset):
-    # 如果接受了SubID参数，则会读取每个被试的数据，如果没有改参数则默认读取全部的数据
-    def __init__(self, path='../dataset/images/', SubId=None):
-        self.path = path
-        self.dataset = self.loadData(SubId)
+    def __init__(self, datasetName, path='../dataset/images/', SubId=None):
+        if SubId == None:
+            self.path = path
+        else:
+            self.path = path + 'SubImages/' + str(SubId) + '/'
+        self.datasetName = datasetName + '.pickle'
+
+        self.dataset = self.loadData()
 
     def __getitem__(self, index):
         data = self.dataset[index][0]
@@ -28,12 +32,10 @@ class MyDataset(Dataset):
     def __len__(self):
         return len(self.dataset)
 
-    def loadData(self, SubId):
-        if SubId == None:
-            path = self.path
-        else:
-            path = self.path + 'SubImages/' + str(SubId) + '/'
-
-        with open(path, 'rb') as f:
+    def loadData(self):
+        with open(self.path + self.datasetName, 'rb') as f:
             dataset = pickle.load(f)
         return dataset
+
+
+

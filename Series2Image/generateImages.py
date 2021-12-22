@@ -16,8 +16,8 @@ IMFDir = "../dataset/IMFs/"
 imageDir = "../dataset/images/"
 imagesize = [32, 64]
 for sz in imagesize:
-    dataset = []
     for SubId in tqdm(range(1, 31)):
+        dataset = []
         SubDir = str(SubId) + '/'
         for file in os.listdir(IMFDir + SubDir):
             # 读取IMF数据的任务信息
