@@ -12,10 +12,10 @@ from models.ResNet18_cls import ResNet18_cls
 
 def train(datasetName, SubId=None):
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    print("using " + device.type)
+    # print("using " + device.type)
 
     # 加载、划分数据集
-    print("loading dataset", datasetName, "....")
+    print("loading dataset", datasetName, "of SubId = {}....".format(SubId))
     dataset = MyDataset(datasetName=datasetName, path='../dataset/images/', SubId=SubId)
     inputFeatureNum = dataset[0][0].shape[0]
 
@@ -29,18 +29,19 @@ def train(datasetName, SubId=None):
     test_dataLoader = DataLoader(test_dataset, batch_size=BATCH_SIZE, shuffle=True, num_workers=2)
 
     # 加载模型
-    print("loading model ...")
+    # print("loading model ...")
     model = ResNet18_cls(clsNum=3, inFeatNum=inputFeatureNum).to(device)
 
     # 训练
-    print("start training ...")
-    EPOCH_NUM = 101
+    # print("start training ...")
+    EPOCH_NUM = 51
     LEARNING_RATE = 3e-4
     WEIGHT_DECAY = 5e-4
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.Adam(model.parameters(), lr=LEARNING_RATE, weight_decay=WEIGHT_DECAY)
     lossFunc = F.nll_loss
     msg = ""
+    bestACC = -1
     for epoch in tqdm(range(EPOCH_NUM)):
         model.train()
         for train_data, labels in train_dataLoader:
@@ -70,21 +71,31 @@ def train(datasetName, SubId=None):
         acc = (confusion[0][0] + confusion[1][1] + confusion[2][2]) / len(test_dataLoader.dataset)
         prec0, prec1, prec2 = utils.calPrecision(confusion)
         recall0, recall1, recall2 = utils.calRecall(confusion)
-        msg += 'Epoch:{:2} | loss:{:.2f} | acc:{:.4f} | prec0:{:.4f} | prec1:{:.4f} | prec2:{:.4f} | recall0:{:.4f}  | recall1:{:.4f} | recall2:{:.4f}\n' \
+        if acc > bestACC:
+            msg = 'Epoch:{:2} | loss:{:.2f} | acc:{:.4f} | prec0:{:.4f} | prec1:{:.4f} | prec2:{:.4f} | recall0:{:.4f}  | recall1:{:.4f} | recall2:{:.4f}\n' \
               .format(epoch, loss_train, acc, prec0, prec1, prec2, recall0, recall1, recall2)
+            bestACC = acc
 
     # 记录结果
     # resultDIr = "../results/"
     # with open(resultDIr + datasetName + ".txt", 'w') as result:
     #     result.write(msg)
     print(msg)
+    return msg
 
 if __name__ == '__main__':
     datasetPath = "../dataset/images/SubImages/"
-    features = ['linear']
+    features = ['tan', 'tanh', 'sigmoid']
     imageSizes = [32, 64]
 
+    featureCnt = 8
     for feature in features:
         for imageSize in imageSizes:
+            featureCnt += 1
+            accs = []
             datasetName = feature + '_' + str(imageSize)
-            train(datasetName, SubId=5)
+            for SubId in range(1, 31):
+                msg = train(datasetName, SubId=SubId)
+                idx = msg.find('acc:')
+                accs.append(float(msg[idx + 4: idx + 10]))
+            utils.writeSubResults(file='../results/SubResults.xlsx', accs=accs, feature=feature, size=imageSize, colCnt=featureCnt)
