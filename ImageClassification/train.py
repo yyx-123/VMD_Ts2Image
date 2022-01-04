@@ -8,6 +8,7 @@ import utils
 from tqdm import tqdm
 from torch.utils.data.dataloader import DataLoader
 from models.ResNet18_cls import ResNet18_cls
+from sklearn.metrics import confusion_matrix
 
 
 def train(datasetName, SubId=None):
@@ -16,7 +17,7 @@ def train(datasetName, SubId=None):
 
     # 加载、划分数据集
     print("loading dataset", datasetName, "of SubId = {}....".format(SubId))
-    dataset = MyDataset(datasetName=datasetName, path='../dataset/images/', SubId=SubId)
+    dataset = MyDataset(datasetName=datasetName, path='../dataset/imagesWithoutVMD/', SubId=SubId)
     inputFeatureNum = dataset[0][0].shape[0]
 
     TRAIN_PERCENT = 0.8
@@ -56,6 +57,7 @@ def train(datasetName, SubId=None):
             optimizer.step()
 
         model.eval()
+
         confusion = np.zeros([3, 3])
         for test_data, test_label in test_dataLoader:
             test_data = test_data.to(device)
@@ -65,6 +67,7 @@ def train(datasetName, SubId=None):
             pred = torch.max(out, dim=1).indices
             for idx in range(len(test_label)):
                 confusion[test_label[idx]][pred[idx]] += 1
+
 
         # 计算各项分类指标
         # 准确率：混淆矩阵对角线元素和（分类正确的样本数） / 总样本数
@@ -84,11 +87,11 @@ def train(datasetName, SubId=None):
     return msg
 
 if __name__ == '__main__':
-    datasetPath = "../dataset/images/SubImages/"
-    features = ['tan', 'tanh', 'sigmoid']
+    datasetPath = "../dataset/imagesWithoutVMD/SubImages/"
+    features = ['linear', 'GAF', 'GAF_MTF']
     imageSizes = [32, 64]
 
-    featureCnt = 8
+    featureCnt = 0
     for feature in features:
         for imageSize in imageSizes:
             featureCnt += 1
@@ -98,4 +101,5 @@ if __name__ == '__main__':
                 msg = train(datasetName, SubId=SubId)
                 idx = msg.find('acc:')
                 accs.append(float(msg[idx + 4: idx + 10]))
-            utils.writeSubResults(file='../results/SubResults.xlsx', accs=accs, feature=feature, size=imageSize, colCnt=featureCnt)
+            utils.writeSubResults(file='../results/SubResultsWithoutVMD.xlsx', accs=accs,
+                                  feature=feature, size=imageSize, colCnt=featureCnt)

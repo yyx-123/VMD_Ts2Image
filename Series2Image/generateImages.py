@@ -11,9 +11,9 @@ LEN = 400
 t = np.linspace(0, Ts * LEN, LEN)
 
 
-IMFDir = "../dataset/IMFs/"
+IMFDir = "../dataset/withoutVMD/"
 
-imageDir = "../dataset/images/"
+imageDir = "../dataset/imagesWithoutVMD/"
 imagesize = [32, 64]
 for sz in imagesize:
     for SubId in tqdm(range(1, 31)):
@@ -31,12 +31,12 @@ for sz in imagesize:
             IMF = originalIMF.reshape(1, -1)
 
             # 有选择性的计算特征(GAF、MTF、tan、tanh、sigmoid、nonmapping)并融合
-            featureSel = {'GAF': False,
-                          'MTF': False,
+            featureSel = {'GAF': True,
+                          'MTF': True,
                           'tan': False,
                           'tanh': False,
                           'sigmoid': False,
-                          'linear': True
+                          'linear': False
                           }
             IMAGE_SIZE = sz
             BINs = 32

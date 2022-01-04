@@ -16,13 +16,13 @@ fs = 1 / Ts
 t = np.linspace(0, Ts*LEN, LEN)
 
 # 提取每一个被试的近红外数据
-for SubId in range(1, 31):
+for SubId in range(9, 31):
     print(SubId)
-    SubDir = str(SubId) + "\\"
+    SubDir = str(SubId) + "/"
     if SubId <= 9:
-        nirsdata = scio.loadmat('..\\dataset\\Sub0' + str(SubId) + '.mat')['nirsdata'][0][0][0]
+        nirsdata = scio.loadmat('../dataset/rawData/Sub0' + str(SubId) + '.mat')['nirsdata'][0][0][0]
     else:
-        nirsdata = scio.loadmat('..\\dataset\\Sub' + str(SubId) + '.mat')['nirsdata'][0][0][0]
+        nirsdata = scio.loadmat('../dataset/rawData/Sub' + str(SubId) + '.mat')['nirsdata'][0][0][0]
 
     # 对于每一次任务，提取信号起始点
     for taskNum in tqdm(range(75)):
@@ -31,8 +31,17 @@ for SubId in range(1, 31):
         # 对每一通道的数据进行划分、计算
         for channel in range(20):
             data = nirsdata[:, channel][startpoint: startpoint + LEN]
-            ALPHA = 150
 
+            # 不进行VMD
+            # tgtDir = "../dataset/withoutVMD/"
+            # if not os.path.exists(tgtDir + SubDir):
+            #     os.mkdir(tgtDir + SubDir)
+            # fileName = "taskNum={}_task={}_channel={}".format(taskNum, event[taskNum], channel)
+            # np.save(tgtDir + SubDir + fileName, data)
+
+
+            # 进行VMD
+            ALPHA = 150
             K = utils.findBestK(data=data, fs=fs, ALPHA=ALPHA, Kmin=2, Kmax=8)
             if K > 0:
                 u, omega, corr, IO = utils.myVMD(data=data, fs=fs, ALPHA=ALPHA, K=K)

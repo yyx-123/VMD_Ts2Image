@@ -141,7 +141,6 @@ def IO(data, u):
                     IO += u[j, :][t] * u[k, :][t] / sum
     return IO
 
-# 可以根据SubId, taskNum, channel参数找到IMF，并将其可视化
 def showIMF(SubId, taskNum, channel):
     dir = 'dataset/IMFs/' + str(SubId) + '/'
     for file in os.listdir(dir):
