@@ -23,6 +23,10 @@ for SubId in range(1, 31):
 
     print('SubID:{}'.format(SubId))
     print(SubRst)
+    print(np.sum(SubRst[0]))
+    print(np.sum(SubRst[1]))
+    print(np.sum(SubRst[2]))
+    print(np.sum(SubRst[0]) + np.sum(SubRst[1]) + np.sum(SubRst[2]))
     task1Cnt.append(np.sum(SubRst[0]))
     task2Cnt.append(np.sum(SubRst[1]))
     task3Cnt.append(np.sum(SubRst[2]))
