@@ -37,5 +37,8 @@ class MyDataset(Dataset):
             dataset = pickle.load(f)
         return dataset
 
+if __name__ == '__main__':
+    dataset = MyDataset("linear_32", path="../dataset/images/", SubId=1)
+
 
 

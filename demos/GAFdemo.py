@@ -2,8 +2,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 from pyts.image import GramianAngularField
 
-ts1 = np.array([5,5,5,5,5,5,5,5,5,5,5,6,7,8,9,10,9,8,7,6,5]).reshape(1, -1)
+ts1 = np.array([5, 5, 5, 5, 5, 5, 5, 5,5,5,5,6,7,8,9,10,9,8,7,6,5]).reshape(1, -1)
 ts2 = np.array([5,6,7,8,9,10,9,8,7,6,5,5,5,5,5,5,5,5,5,5,5]).reshape(1, -1)
+
 
 image_size = 20
 gasf = GramianAngularField(image_size=image_size, method='summation')

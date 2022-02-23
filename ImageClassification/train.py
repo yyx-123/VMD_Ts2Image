@@ -17,7 +17,7 @@ def train(datasetName, SubId=None):
 
     # 加载、划分数据集
     print("loading dataset", datasetName, "of SubId = {}....".format(SubId))
-    dataset = MyDataset(datasetName=datasetName, path='../dataset/imagesWithoutVMD/', SubId=SubId)
+    dataset = MyDataset(datasetName=datasetName, path='../dataset/images/', SubId=SubId)
     inputFeatureNum = dataset[0][0].shape[0]
 
     TRAIN_PERCENT = 0.8
